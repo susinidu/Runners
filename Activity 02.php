@@ -19,7 +19,7 @@ table, th, td {
 <body>
     <h2>Data Input</h2>
 
-        <form action="Activity 02.php" method="post">
+        <form action="Activity 02.php" action="report/report.php"   method="post">
         <div class="form group">
             <label>Runner Id :</label>
             <dd><input type = "number" name ="runnerid" id="runnerid" class="form control"></dd>
@@ -29,8 +29,8 @@ table, th, td {
             <dd><input type = "text" name ="runnername" id="runnername" class="form control"></dd>
         </div><br>
         <div class="form group">
-            <label>Radius(m) :</label>
-            <dd><input type = "number" name="radius" id="radius" class="form control"></dd>
+            <label for="quantity">Radius (30m-40m) :</label>
+            <dd><input type = "number" name="radius" id="radius" min="30" max="40" class="form control"></dd>
         </div><br>
         <div class="form group">
             <label>Start Time :</label>
@@ -44,13 +44,12 @@ table, th, td {
             <label>Number Of Laps:</label>
             <dd><input type = "number" name="numberoflaps" id="numberoflaps" class="form control"></dd>
         </div><br>
-        <input type="submit" class="submit">
-     </form><br>
+        <input type="submit" class="Submit">
 
-     <form action="report/report.php">    
-
-<input type="submit" value="View Report" class="submit"/>
-</form><br>
+        </form><br>
+    
+        <form action="report/report.php">    
+    <input type="submit" value="View Report" class="submit"/><br><br>
 
      <?php
 
@@ -67,16 +66,12 @@ table, th, td {
      $query = "INSERT INTO `RunnersData`(`Runner_Id`, `Runner_Name`, `Radius`, `Start_Time`, `End_Time`, `Number_Of_Laps`) VALUES ('$runnerid','$runnername','$radius','$starttime','$endtime','$numberoflaps')";
     $insert = mysqli_query($connection, $query);
     if ($insert){
-        echo "Details Added...";
+        echo "<b><i>Details Added...</i></b>";
     } else {
         echo "There is some problem...";
     }
 
     ?>
-
-     <?php
-    $connection = mysqli_connect("localhost","root","","RUNNERS");
-?>
 
      <h2>Report</h2>
 
