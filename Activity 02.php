@@ -13,13 +13,13 @@ table, th, td {
 </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Runners</title>
 </head>
 <body>
     <h2>Data Input</h2>
 
-        <form action="Activity 02.php" action="report/report.php"   method="post">
+        <form action="Activity 02.php"  method="post">
         <div class="form group">
             <label>Runner Id :</label>
             <dd><input type = "number" name ="runnerid" id="runnerid" class="form control"></dd>
@@ -82,12 +82,13 @@ table, th, td {
                     <th>Radius</th>
                     <th>Start Time</th>
                     <th>End Time</th>
+                    <th>Duration</th>
                     <th>Number Of Laps</th>
 
             </tr>
 
                 <?php
-                    $sql ="SELECT * FROM `RunnersData`";
+                    $sql = "SELECT Runner_Id, Runner_Name, Radius, Start_Time, End_Time, Number_Of_Laps, TIMEDIFF(End_Time, Start_Time) AS difference FROM RunnersData";
                     $result = mysqli_query($connection,$sql);
                     while ($row =mysqli_fetch_assoc($result)) {
 
@@ -97,12 +98,13 @@ table, th, td {
                     <td>'.$row['Radius'].'</td>
                     <td>'.$row['Start_Time'].'</td>
                     <td>'.$row['End_Time'].'</td>
+                    <td>'.$row['difference'].'</td>
                     <td>'.$row['Number_Of_Laps'].'</td>
             </tr>';
                     }
                 ?>
 
         </table>
-     
+
 </body>
 </html>
