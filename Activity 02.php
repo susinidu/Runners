@@ -10,6 +10,8 @@ table, th, td {
   border: 2px solid black;
   border-collapse: collapse;
 }
+th{text-align:left;
+}
 </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,11 +36,11 @@ table, th, td {
         </div><br>
         <div class="form group">
             <label>Start Time :</label>
-            <dd><input type = "time" name="starttime" id="starttime" class="form control"></dd>
+            <dd><input type = "time" step = "1" name="starttime" id="starttime" class="form control"></dd>
         </div><br>
         <div class="form group">
             <label>End Time :</label>
-            <dd><input type = "time" name="endtime" id="endtime" class="form control"></dd>
+            <dd><input type = "time" step ="1" name="endtime" id="endtime" class="form control"></dd>
         </div><br>
         <div class="form group">
             <label>Number Of Laps:</label>
@@ -56,20 +58,20 @@ table, th, td {
      //Database Connection.
     $connection = mysqli_connect('localhost', 'root', '', 'RUNNERS');
     
-    $runnerid = $_POST['runnerid'];
-    $runnername  = $_POST['runnername'];
-    $radius = $_POST['radius'];
-    $starttime = $_POST['starttime'];
-    $endtime = $_POST['endtime'];
-    $numberoflaps = $_POST['numberoflaps'];
+        $runnerid = $_POST['runnerid'];
+        $runnername  = $_POST['runnername'];
+        $radius = $_POST['radius'];
+        $starttime = $_POST['starttime'];
+        $endtime = $_POST['endtime'];
+        $numberoflaps = $_POST['numberoflaps'];
 
-     $query = "INSERT INTO `RunnersData`(`Runner_Id`, `Runner_Name`, `Radius`, `Start_Time`, `End_Time`, `Number_Of_Laps`) VALUES ('$runnerid','$runnername','$radius','$starttime','$endtime','$numberoflaps')";
-    $insert = mysqli_query($connection, $query);
-    if ($insert){
-        echo "<b><i>Details Added...</i></b>";
-    } else {
-        echo "There is some problem...";
-    }
+            $query = "INSERT INTO `RunnersData`(`Runner_Id`, `Runner_Name`, `Radius`, `Start_Time`, `End_Time`, `Number_Of_Laps`) VALUES ('$runnerid','$runnername','$radius','$starttime','$endtime','$numberoflaps')";
+                    $insert = mysqli_query($connection, $query);
+        if ($insert){
+            echo "<b><i>Details Added...</i></b>";
+        } else {
+            echo "There is some problem...";
+        }
 
     ?>
 
@@ -79,6 +81,7 @@ table, th, td {
             <tr>
                     <th>Runner Id</th>
                     <th>Runner</th>
+                    <th>Speed(kmph)</th>
                     <th>Radius</th>
                     <th>Start Time</th>
                     <th>End Time</th>
@@ -88,13 +91,15 @@ table, th, td {
             </tr>
 
                 <?php
-                    $sql = "SELECT Runner_Id, Runner_Name, Radius, Start_Time, End_Time, Number_Of_Laps, TIMEDIFF(End_Time, Start_Time) AS difference FROM RunnersData";
+                    $sql ="SELECT Runner_Id, Runner_Name, Radius, Start_Time, End_Time, Number_Of_Laps, TIMEDIFF(End_Time, Start_Time) AS difference, ROUND(((2* 22/7* Radius)/(HOUR(End_Time - Start_Time)* 3600 + MINUTE(End_Time - Start_Time)* 60 + SECOND(End_Time - Start_Time))* Number_Of_Laps)*18/5, 2) AS  Speed  FROM RunnersData";
+                    //$sql = "SELECT Runner_Id, Runner_Name, Radius, Start_Time, End_Time, Number_Of_Laps, TIMEDIFF(End_Time, Start_Time) AS difference FROM RunnersData";
                     $result = mysqli_query($connection,$sql);
                     while ($row =mysqli_fetch_assoc($result)) {
 
                     echo '<tr>
                     <td>'.$row['Runner_Id'].'</td>
                     <td>'.$row['Runner_Name'].'</td>
+                    <td>'.$row['Speed'].'</td>
                     <td>'.$row['Radius'].'</td>
                     <td>'.$row['Start_Time'].'</td>
                     <td>'.$row['End_Time'].'</td>
