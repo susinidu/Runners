@@ -77,7 +77,7 @@ th{text-align:left;
 
      <h2>Report</h2>
 
-        <table width =80% >
+        <table width =90% >
             <tr>
                     <th>Runner Id</th>
                     <th>Runner</th>
@@ -92,7 +92,6 @@ th{text-align:left;
 
                 <?php
                     $sql ="SELECT Runner_Id, Runner_Name, Radius, Start_Time, End_Time, Number_Of_Laps, TIMEDIFF(End_Time, Start_Time) AS difference, ROUND(((2* 22/7* Radius)/(HOUR(End_Time - Start_Time)* 3600 + MINUTE(End_Time - Start_Time)* 60 + SECOND(End_Time - Start_Time))* Number_Of_Laps)*18/5, 2) AS  Speed  FROM RunnersData";
-                    //$sql = "SELECT Runner_Id, Runner_Name, Radius, Start_Time, End_Time, Number_Of_Laps, TIMEDIFF(End_Time, Start_Time) AS difference FROM RunnersData";
                     $result = mysqli_query($connection,$sql);
                     while ($row =mysqli_fetch_assoc($result)) {
 
