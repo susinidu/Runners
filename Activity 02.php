@@ -24,15 +24,15 @@ th{text-align:left;
         <form action="Activity 02.php"  method="post">
         <div class="form group">
             <label>Runner Id :</label>
-            <dd><input type = "number" name ="runnerid" id="runnerid" class="form control"></dd>
+            <dd><input type = "number" name ="runnerid" id="runnerid" class="form control" autofocus></dd>
         </div><br>
             <div class="form group">
             <label>Runner Name :</label>
             <dd><input type = "text" name ="runnername" id="runnername" class="form control"></dd>
         </div><br>
         <div class="form group">
-            <label for="quantity">Radius (30m-40m) :</label>
-            <dd><input type = "number" name="radius" id="radius" min="30" max="40" class="form control"></dd>
+            <label for="quantity">Radius (Max-50m) :</label>
+            <dd><input type = "number" name="radius" id="radius" max="50" class="form control"></dd>
         </div><br>
         <div class="form group">
             <label>Start Time :</label>
